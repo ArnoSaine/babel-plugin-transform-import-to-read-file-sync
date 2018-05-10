@@ -2,14 +2,21 @@
   "name": "babel-plugin-transform-import-to-read-file-sync",
   "version": "0.1.2",
   "description": "Use import to read any file contents to local variable in Node.js. Filename is resolved like regular import source.",
-  "main": "lib",
+  "main": "cjs",
   "scripts": {
-    "prebuild": "rimraf lib",
-    "build": "babel src --out-dir lib",
-    "dev": "npm run build -- --watch",
-    "test": "node lib/test",
-    "prepublish": "npm run build && npm test"
+    "build": "npm run inbuild --",
+    "eslint": "eslint {.,src/**}/*.js --fix",
+    "inbuild": "library-util babel --verbose",
+    "lint": "npm run eslint && npm run prettier",
+    "prebuild": "rimraf cjs es",
+    "precommit": "lint-staged",
+    "prepack": "npm run build && npm test",
+    "prettier": "npm run prettier:write -- {.,src/**}/*.{js,json} !./package-lock.json",
+    "prettier:write": "prettier --config .prettierrc.js --write",
+    "preversion": "npm run lint",
+    "test": "node cjs/test"
   },
+  "keywords": ["babel-plugin", "transform", "readfile"],
   "author": {
     "name": "Arno Saine",
     "email": "arno@mowhi.com"
@@ -19,18 +26,17 @@
     "url": "https://github.com/ArnoSaine/babel-plugin-transform-import-to-read-file-sync.git"
   },
   "license": "ISC",
-  "keywords": [
-    "babel-plugin",
-    "transform",
-    "readfile"
-  ],
   "dependencies": {
-    "babel-template": "^6.22.0"
+    "@babel/runtime": "^7.0.0-beta.46",
+    "babel-template": "^6.26.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.22.2",
-    "babel-core": "^6.22.1",
-    "babel-preset-es2015": "^6.22.0",
-    "rimraf": "^2.5.4"
+    "babel-core": "^6.26.3",
+    "library-util": "^0.1.8"
+  },
+  "module": "es",
+  "lint-staged": {
+    "*.js": ["eslint --fix", "npm run prettier:write", "git add"],
+    "*.{css,json,less,md,scss}": ["npm run prettier:write", "git add"]
   }
 }
