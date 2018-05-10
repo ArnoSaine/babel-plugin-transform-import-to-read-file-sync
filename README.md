@@ -37,24 +37,26 @@ console.log(require("./file.txt"));
 
 ### Options
 
-Plugin expects options object or array of objects. `test` property is pattern to match files. `options` property is passed directly to `readFileSync` as second argument. If no `options` is specified, then `readFileSync` returns a buffer.
+Plugin expects options object. `test` property is pattern to match files. `options` property is passed directly to `readFileSync` as second argument. If no `options` is specified, then `readFileSync` returns a buffer.
 
-You can use array to specify multiple test patterns and `readFileSync` options:
+You can use `"options"` array property to specify multiple test patterns and `readFileSync` options:
 
 ```json
 {
   "plugins": [
     [
       "transform-import-to-read-file-sync",
-      [
-        {
-          "test": "\\.txt$",
-          "options": "utf8"
-        },
-        {
-          "test": "\\.png$"
-        }
-      ]
+      {
+        "options": [
+          {
+            "test": "\\.txt$",
+            "options": "utf8"
+          },
+          {
+            "test": "\\.png$"
+          }
+        ]
+      }
     ]
   ]
 }

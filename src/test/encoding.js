@@ -14,7 +14,7 @@ strictEqual(
   transformToCodeWithOptions(importFile, {
     plugins: [
       [
-        '.',
+        'module:.',
         {
           test: '\\.txt$',
           options: 'utf8'
@@ -24,7 +24,7 @@ strictEqual(
   }),
   `${importReadFileSync}
 
-const file = _readFileSync(require.resolve('./file.txt'), "utf8");`,
+const file = _readFileSync(require.resolve("./file.txt"), "utf8");`,
   'Use encoding.'
 );
 
@@ -32,28 +32,30 @@ strictEqual(
   transformToCodeWithOptions(`${importFile}${importFooFile}`, {
     plugins: [
       [
-        '.',
-        [
-          {
-            test: '\\.txt$',
-            options: 'ascii'
-          },
-          {
-            test: '\\.foo$',
-            options: {
-              encoding: 'base64',
-              flag: 'r'
+        'module:.',
+        {
+          options: [
+            {
+              test: '\\.txt$',
+              options: 'ascii'
+            },
+            {
+              test: '\\.foo$',
+              options: {
+                encoding: 'base64',
+                flag: 'r'
+              }
             }
-          }
-        ]
+          ]
+        }
       ]
     ]
   }),
   `${importReadFileSync}
 
-const file = _readFileSync(require.resolve('./file.txt'), "ascii");
+const file = _readFileSync(require.resolve("./file.txt"), "ascii");
 
-const fooFile = _readFileSync(require.resolve('./file.foo'), {
+const fooFile = _readFileSync(require.resolve("./file.foo"), {
   "encoding": "base64",
   "flag": "r"
 });`,

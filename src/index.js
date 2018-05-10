@@ -38,7 +38,8 @@ export default ({
     return args;
   };
   const testOptions = (opts, value, match) => {
-    const optsArray = Array.isArray(opts) ? opts : [opts];
+    const { options = [], test } = opts;
+    const optsArray = test ? [opts] : options;
     optsArray.some(({ options, test }) => {
       if (test && new RegExp(test).test(value)) {
         return match(readFileSyncCallExpressionArgs(value, options));
