@@ -2,12 +2,6 @@
 
 Use `import` to read any file contents to local variable in Node.js. Filename is resolved like regular `import` source.
 
-## Installation
-
-```sh
-npm install babel-plugin-transform-import-to-read-file-sync
-```
-
 ## Example
 
 ```js
@@ -61,7 +55,3 @@ You can use `"options"` array property to specify multiple test patterns and `re
   ]
 }
 ```
-
-## License
-
-ISC
