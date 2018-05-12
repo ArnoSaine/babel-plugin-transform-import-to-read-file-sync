@@ -11,6 +11,7 @@ import './require';
 import './encoding';
 import './illegalUsage';
 import './fsPreImported';
+import './#1-multiple-imports-with-modules-transform';
 
 strictEqual(
   transform(importFile).code,

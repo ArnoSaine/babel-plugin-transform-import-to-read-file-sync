@@ -77,7 +77,7 @@ export default ({
                 }
                 if (isImportSpecifier(specifier)) {
                   if (specifier.imported.name === 'readFileSync') {
-                    readFileSync = specifier.local;
+                    readFileSync = { ...specifier.local };
                     return true;
                   }
                 }
