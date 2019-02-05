@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-transform-import-to-read-file-sync",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Use import to read any file contents to local variable in Node.js. Filename is resolved like regular import source.",
   "main": "cjs",
   "scripts": {
