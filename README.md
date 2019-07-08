@@ -6,11 +6,11 @@ Use `import` to read any file contents to local variable in Node.js. Filename is
 
 ```js
 import file from "./file.txt";
-// => const file = _readFileSync(require.resolve('./file.txt', "utf8"));
+// => const file = _readFileSync(require.resolve('./file.txt'), "utf8");
 // readFileSync is imported from 'fs' as some unique identifier, if not already available.
 
 console.log(require("./file.txt"));
-// => console.log(require('fs').readFileSync(require.resolve('./file.txt', "utf8")));
+// => console.log(require('fs').readFileSync(require.resolve('./file.txt'), "utf8"));
 ```
 
 ##### `.babelrc`
